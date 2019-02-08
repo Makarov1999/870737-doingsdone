@@ -1,4 +1,4 @@
-<?php require_once('functions.php');?>
+<?php date_default_timezone_set('Europe/Moscow'); ?>
 <h2 class="content__main-heading">Список задач</h2>
 
 <form class="search-form" action="index.php" method="post">
@@ -24,7 +24,7 @@
 <table class="tasks">
   <?php foreach ($tasks as $key => $value): ?>
     <?php if ($show_complete_tasks === 1): ?>
-      <tr class="tasks__item task <?=$value['task_finish'] ? 'task--completed ': ''; ?><?=is_task_urgent($value['task_date']) ? 'task--important': '';?>">
+      <tr class="tasks__item task <?=$value['task_finish'] ? 'task--completed ': ''; ?><?=(strtotime("+24 hours now") > strtotime($value['task_date'])) ? 'task--important': '';?>">
           <td class="task__select">
               <label class="checkbox task__checkbox">
                   <input class="checkbox__input visually-hidden" type="checkbox"<?=isset($value["task_finish"]) ? $value["task_finish"] ? 'checked' : "" :""; ?>>
@@ -36,7 +36,7 @@
           </td>
     </tr>
   <?php elseif (!$value['task_finish']):?>
-    <tr class="tasks__item task <?=is_task_urgent($value['task_date']) ? 'task--important': '';?>">
+    <tr class="tasks__item task <?=(strtotime("+24 hours now") > strtotime($value['task_date'])) ? 'task--important': '';?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
                 <input class="checkbox__input visually-hidden" type="checkbox">

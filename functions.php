@@ -22,17 +22,5 @@ function count_tasks( $tasks_array, $project_key) {
   }
   return $quantity;
 }
-function is_task_urgent ($date) {
-  date_default_timezone_set('Europe/Moscow');
-  if ($date === 'Нет') {
-    return false;
-  }
-  $current = strtotime("now");
-  $next = strtotime ($date);
-  // print($current);
-  if ($next  - $current < 86400) {
-    return true;
-  }
-  return false;
-}
+
 ?>
