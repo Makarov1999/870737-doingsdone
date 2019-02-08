@@ -29,7 +29,6 @@ function is_task_urgent ($date) {
   }
   $current = strtotime("now");
   $next = strtotime ($date);
-  // print($current);
   if ($next  - $current < 86400) {
     return true;
   }
