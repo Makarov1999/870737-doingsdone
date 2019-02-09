@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/Moscow');
 function include_template($name, $data) {
     $name = 'templates/' . $name;
     $result = '';

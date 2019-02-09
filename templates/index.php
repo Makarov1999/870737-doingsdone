@@ -23,8 +23,8 @@
 
 <table class="tasks">
   <?php foreach ($tasks as $key => $value): ?>
-    <?php if ($show_complete_tasks === 1):?>
-      <tr class="tasks__item task <?=isset($value["task_finish"]) ? $value["task_finish"] ? 'task--completed' : "" :"";?>">
+    <?php if ($show_complete_tasks === 1): ?>
+      <tr class="tasks__item task <?=$value['task_finish'] ? 'task--completed ': ''; ?><?=(strtotime("+24 hours now") > strtotime($value['task_date'])) ? 'task--important': '';?>">
           <td class="task__select">
               <label class="checkbox task__checkbox">
                   <input class="checkbox__input visually-hidden" type="checkbox"<?=isset($value["task_finish"]) ? $value["task_finish"] ? 'checked' : "" :""; ?>>
@@ -32,23 +32,21 @@
               </label>
           </td>
           <td class="task__date"><?=isset($value["task_date"]) ? $value["task_date"] : "";?></td>
-
           <td class="task__controls">
           </td>
     </tr>
-  <?php elseif(isset ($value["task_finish"]) and !$value["task_finish"]): ?>
-    <tr class="tasks__item task <?=isset($value["task_finish"]) ? $value["task_finish"] ? 'task--completed' : "" :"";?>">
+  <?php elseif (!$value['task_finish']):?>
+    <tr class="tasks__item task <?=(strtotime("+24 hours now") > strtotime($value['task_date'])) ? 'task--important': '';?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
-                <input class="checkbox__input visually-hidden" type="checkbox"<?=isset($value["task_finish"]) ? $value["task_finish"] ? 'checked' : "" :""; ?>>
+                <input class="checkbox__input visually-hidden" type="checkbox">
                 <span class="checkbox__text"><?=isset($value["task_name"]) ? strip_tags($value["task_name"]) :"";?></span>
             </label>
         </td>
         <td class="task__date"><?=isset($value["task_date"]) ? $value["task_date"] : "";?></td>
-
         <td class="task__controls">
         </td>
   </tr>
-    <?php endif; ?>
+  <?php endif; ?>
   <?php endforeach; ?>
 </table>
