@@ -9,7 +9,7 @@ CREATE TABLE task (
 	task_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	date_create TIMESTAMP,
 	date_complete TIMESTAMP,
-	task_status BOOL ,
+	task_status INT ,
 	task_name TEXT, 
 	deadline TIMESTAMP
 	);  
@@ -36,5 +36,5 @@ CREATE INDEX date_registration ON cite_user(registration_date);
 CREATE INDEX user_email ON cite_user(email);
 CREATE INDEX name ON cite_user(username);
 CREATE INDEX passw ON cite_user(password(100));
-ALTER TABLE task MODIFY task_status INT;
+
 
