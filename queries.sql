@@ -17,7 +17,7 @@ UPDATE task SET id_user = 1 WHERE task_id < 5
 UPDATE task SET id_user = 2 WHERE task_id > 5;
 UPDATE task SET id_user = 2 WHERE task_id = 5;
 UPDATE project SET id_user = 1 WHERE project_id < 6;
-/*Получаем список проектов для одного пользователя*/
+/*Получаем список проектов для одного пользователя */
 SELECT p.project_name, c.username FROM project p INNER JOIN cite_user c ON p.id_user = c.user_id;
 /*Получаем список из всех задач для одного проекта(Домашние дела);*/
 SELECT t.task_name, p.project_name FROM task t INNER JOIN project p ON p.project_id = t.project_id AND p.project_id = 4;
