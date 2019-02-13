@@ -10,7 +10,7 @@ CREATE TABLE task (
 	date_create TIMESTAMP,
 	date_complete TIMESTAMP,
 	task_status INT ,
-	task_name TEXT, 
+	task_name CHAR(255), 
 	deadline TIMESTAMP
 	);  
 CREATE TABLE cite_user (
@@ -36,5 +36,4 @@ CREATE INDEX date_registration ON cite_user(registration_date);
 CREATE INDEX user_email ON cite_user(email);
 CREATE INDEX name ON cite_user(username);
 CREATE INDEX passw ON cite_user(password(100));
-
 
