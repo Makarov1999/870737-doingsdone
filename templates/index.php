@@ -35,7 +35,7 @@
           <td class="task__controls">
           </td>
     </tr>
-  <?php elseif ($task['task_status'] === '0'):?>
+  <?php elseif ($task['task_status'] === '0'): ?>
     <tr class="tasks__item task <?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
