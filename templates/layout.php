@@ -39,13 +39,14 @@
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
-
+                <div class="test">
+                </div>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                      <?php foreach ($projects as $key => $value): ?>
+                      <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?= isset($projects[$key]) ? $value : "" ?></a>
-                            <span class="main-navigation__list-item-count"><?=count_tasks($tasks, $key);?></span>
+                            <a class="main-navigation__list-item-link" href="#"><?=$project['project_name']?></a>
+                            <span class="main-navigation__list-item-count"><?=count_tasks($tasks, $project['project_id']);?></span>
                         </li>
                       <?php endforeach; ?>
                     </ul>
