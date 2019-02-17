@@ -39,7 +39,7 @@
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
-                <div class="test">
+                
                 </div>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">

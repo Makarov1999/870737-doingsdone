@@ -1,20 +1,22 @@
 <?php
 // показывать или нет выполненные задачи
-$show_complete_tasks = rand(0, 1);
-$con  = mysqli_connect('127.0.0.1','root', '', 'DOINGSDONE');
-if (!$con) {
-  print('Ошибка подключения MySQL:'.mysqli_connect_error());
-}
-mysqli_set_charset($con, 'utf-8');
-$result_projects = mysqli_query($con, "SELECT p.project_name, p.project_id FROM project p INNER JOIN cite_user c ON p.id_user = c.user_id AND p.id_user = 1");
-$result_tasks  = mysqli_query($con, "SELECT t.task_name, t.deadline, t.project_id, t.task_status FROM task t INNER JOIN cite_user c ON t.id_user = c.user_id AND t.id_user = 1");
-if (!$result_projects) {
-  $error = mysqli_error($con);
-  print('Ошибка MySQL: '.$error);
-} else {
-  $projects = mysqli_fetch_all($result_projects, MYSQLI_ASSOC);
-}
-$tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
+// $show_complete_tasks = rand(0, 1);
+// $con  = mysqli_connect('127.0.0.1','root', '', 'DOINGSDONE');
+// if (!$con) {
+//   print('Ошибка подключения MySQL:'.mysqli_connect_error());
+// } else {
+//
+// }
+// mysqli_set_charset($con, 'utf-8');
+// $result_projects = mysqli_query($con, "SELECT p.project_name, p.project_id FROM project p INNER JOIN cite_user c ON p.id_user = c.user_id AND p.id_user = 1");
+// $result_tasks  = mysqli_query($con, "SELECT t.task_name, t.deadline, t.project_id, t.task_status FROM task t INNER JOIN cite_user c ON t.id_user = c.user_id AND t.id_user = 1");
+// if (!$result_projects) {
+//   $error = mysqli_error($con);
+//   print('Ошибка MySQL: '.$error);
+// } else {
+//   $projects = mysqli_fetch_all($result_projects, MYSQLI_ASSOC);
+// }
+// $tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
 
 // $tasks = [
 //   [
