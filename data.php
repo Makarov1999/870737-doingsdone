@@ -1,5 +1,5 @@
 <?php
-// показывать или нет выполненные задачи
+// показывать или нет выполненные  задачи
 $show_complete_tasks = rand(0, 1);
 $con  = mysqli_connect('127.0.0.1','root', '', 'DOINGSDONE');
 if (!$con) {
