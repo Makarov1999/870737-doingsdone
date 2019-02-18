@@ -22,28 +22,28 @@
 </div>
 
 <table class="tasks">
-  <?php foreach ($tasks as $key => $value): ?>
+  <?php foreach ($tasks as $task): ?>
     <?php if ($show_complete_tasks === 1): ?>
-      <tr class="tasks__item task <?=$value['task_finish'] ? 'task--completed ': ''; ?><?=(strtotime("+24 hours now") > strtotime($value['task_date'])) ? 'task--important': '';?>">
+      <tr class="tasks__item task <?=$task['task_status'] === 1 ? 'task--completed ': ''; ?><?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>">
           <td class="task__select">
               <label class="checkbox task__checkbox">
-                  <input class="checkbox__input visually-hidden" type="checkbox"<?=isset($value["task_finish"]) ? $value["task_finish"] ? 'checked' : "" :""; ?>>
-                  <span class="checkbox__text"><?=isset($value["task_name"]) ? strip_tags($value["task_name"]) :"";?></span>
+                  <input class="checkbox__input visually-hidden" type="checkbox"<?=$task["task_status"] === '1' ? 'checked' :""; ?>>
+                  <span class="checkbox__text"><?=strip_tags($task["task_name"]);?></span>
               </label>
           </td>
-          <td class="task__date"><?=isset($value["task_date"]) ? $value["task_date"] : "";?></td>
+          <td class="task__date"><?=$task["deadline"] ? date('d.m.Y',strtotime($task['deadline'])) : "Нет";?></td>
           <td class="task__controls">
           </td>
     </tr>
-  <?php elseif (!$value['task_finish']):?>
-    <tr class="tasks__item task <?=(strtotime("+24 hours now") > strtotime($value['task_date'])) ? 'task--important': '';?>">
+  <?php elseif ($task['task_status'] === 0): ?>
+    <tr class="tasks__item task <?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
                 <input class="checkbox__input visually-hidden" type="checkbox">
-                <span class="checkbox__text"><?=isset($value["task_name"]) ? strip_tags($value["task_name"]) :"";?></span>
+                <span class="checkbox__text"><?=strip_tags($task["task_name"]);?></span>
             </label>
         </td>
-        <td class="task__date"><?=isset($value["task_date"]) ? $value["task_date"] : "";?></td>
+        <td class="task__date"><?=$task["deadline"] ? date('d.m.Y',strtotime($task['deadline'])) : "Нет";?></td>
         <td class="task__controls">
         </td>
   </tr>

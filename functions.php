@@ -15,11 +15,45 @@ function include_template($name, $data) {
 }
 function count_tasks( $tasks_array, $project_key) {
   $quantity = 0;
-  foreach ($tasks_array as $key => $value) {
-      if ($project_key === $value["task_category"]) {
+  foreach ($tasks_array as $task) {
+      if ($project_key === $task["project_id"]) {
         $quantity++;
       }
   }
   return $quantity;
+}
+function db_get_prepare_stmt($link, $sql, $data = []) {
+    $stmt = mysqli_prepare($link, $sql);
+
+    if ($data) {
+        $types = '';
+        $stmt_data = [];
+
+        foreach ($data as $value) {
+            $type = null;
+
+            if (is_int($value)) {
+                $type = 'i';
+            }
+            else if (is_string($value)) {
+                $type = 's';
+            }
+            else if (is_double($value)) {
+                $type = 'd';
+            }
+
+            if ($type) {
+                $types .= $type;
+                $stmt_data[] = $value;
+            }
+        }
+
+        $values = array_merge([$stmt, $types], $stmt_data);
+
+        $func = 'mysqli_stmt_bind_param';
+        $func(...$values);
+    }
+
+    return $stmt;
 }
 ?>
