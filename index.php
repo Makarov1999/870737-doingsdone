@@ -17,7 +17,6 @@ $projects = mysqli_fetch_all($result_projects, MYSQLI_ASSOC);
 if (isset($_GET['project_id'])) {
   if (!(consist_array($_GET['project_id'], $projects))) {
     http_response_code(404);
-    print('Ошибка 404');
   } else {
     $arr[] = $_GET['project_id'];
     $sql2 = "SELECT t.task_name, t.deadline, t.project_id, t.task_status FROM task t INNER JOIN cite_user c ON t.id_user = c.user_id AND t.id_user = ? AND t.project_id = ?";
