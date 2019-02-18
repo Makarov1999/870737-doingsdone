@@ -22,5 +22,4 @@ mysqli_stmt_close($stmt2);
 $tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
 $projects = mysqli_fetch_all($result_projects, MYSQLI_ASSOC);
 
-//
 ?>

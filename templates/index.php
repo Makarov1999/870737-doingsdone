@@ -24,7 +24,7 @@
 <table class="tasks">
   <?php foreach ($tasks as $task): ?>
     <?php if ($show_complete_tasks === 1): ?>
-      <tr class="tasks__item task <?=$task['task_status'] === '1' ? 'task--completed ': ''; ?><?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>">
+      <tr class="tasks__item task <?=$task['task_status'] === 1 ? 'task--completed ': ''; ?><?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>">
           <td class="task__select">
               <label class="checkbox task__checkbox">
                   <input class="checkbox__input visually-hidden" type="checkbox"<?=$task["task_status"] === '1' ? 'checked' :""; ?>>
@@ -35,7 +35,7 @@
           <td class="task__controls">
           </td>
     </tr>
-  <?php elseif ($task['task_status'] === '0'): ?>
+  <?php elseif ($task['task_status'] === 0): ?>
     <tr class="tasks__item task <?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
