@@ -56,4 +56,12 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
 
     return $stmt;
 }
+function consist_array($element, $projects_array) {
+  foreach ($projects_array as $project) {
+    if ($project['project_id'] == $element) {
+      return true;
+    }
+  }
+  return false;
+}
 ?>
