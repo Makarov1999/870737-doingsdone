@@ -11,25 +11,18 @@ if ($_SERVER['REQUEST_METHOD']
   $date = htmlspecialchars($_POST['date']);
   if (empty($name_task)) {
     $errors['name'] = 'Введите имя задачи';
-  } //else {
-  //   $data[] = $name_task;
-  // }
+  }
   if (!empty($id_project && !is_project_exist($con, $id_project))) {
       $errors['project'] = 'Такого проекта не существует';
-  } //else {
-  //   $data[] = $id_project;
-  // }
+  }
   if (!empty($_POST['date']) && !validate_date($date)) {
       $errors['date'] = 'Дата не может быть в прошлом или неправильный формат даты';
-  } //else {
-  //   $data = $date;
-  // }
+  }
   if (!empty($errors)) {
     $add_page_content = include_template('add.php',['projects' => $projects, 'errors'=> $errors]);
   } else {
     if ($_FILES['preview']) {
       $uploadfile = "uploads/".$_FILES['preview']['name'];
-      // $data[] = $uploadfile;
       move_uploaded_file($_FILES['preview']['tmp_name'], $uploadfile);
     }
 
