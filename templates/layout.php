@@ -22,7 +22,7 @@
                 </a>
 
                 <div class="main-header__side">
-                    <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить задачу</a>
+                    <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
 
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__image">
@@ -48,7 +48,7 @@
                                     <a class="main-navigation__list-item-link" href="/?project_id=<?=$project['project_id']?>">
                                         <?=$project['project_name']?>
                                     </a>
-                                    <span class="main-navigation__list-item-count"><?=count_tasks($tasks, $project['project_id']);?></span>
+                                    <span class="main-navigation__list-item-count"><?=count_tasks($con, $project['project_id']);?></span>
                                 </li>
                                 <?php endforeach; ?>
                         </ul>
