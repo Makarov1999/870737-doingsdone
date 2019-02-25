@@ -37,5 +37,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } else {
    $content = include_template('register.php', []);
  }
-
 print($content);
