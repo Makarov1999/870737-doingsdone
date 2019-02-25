@@ -87,17 +87,31 @@ function is_project_exist($con, $projects_id) {
 }
 function validate_date($date) {
   if (strtotime($date) < strtotime("now")) {
-    return 0;
+    return false;
   } else {
-    if (date("d.m.Y", strtotime($date))) {
-      return 1;
-    } else {
-      return 1;
+    $result = false;
+    $regexp = '/(\d{2})\.(\d{2})\.(\d{4})/m';
+    if (preg_match($regexp, $date, $parts) && count($parts) == 4) {
+        $result = checkdate($parts[2], $parts[1], $parts[3]);
     }
+    return $result;
   }
 }
 function fetch_date_to_format($date) {
   $new_date = date( "Y-m-d",strtotime($date));
   return $new_date;
 }
+function is_email_exist($con, $email) {
+  $sql = "SELECT email FROM cite_user WHERE email = ?";
+  $email_arr = [$email];
+  $stmt = db_get_prepare_stmt($con, $sql, $email_arr);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  $email_exist = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  if (!empty($email_exist)) {
+    return true;
+  }
+  return false;
+}
+
 ?>
