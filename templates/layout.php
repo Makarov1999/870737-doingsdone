@@ -32,7 +32,7 @@
                         <div class="user-menu__data">
                             <p>Константин</p>
 
-                            <a href="#">Выйти</a>
+                            <a href="../guest.php">Выйти</a>
                         </div>
                     </div>
                 </div>
