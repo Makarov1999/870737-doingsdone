@@ -1,6 +1,6 @@
 <?php
-$arr = [1];
-$show_complete_tasks = rand(0, 1);
+
+$show_complete_tasks = 0;
 date_default_timezone_set('Europe/Moscow');
 function include_template($name, $data) {
     $name = 'templates/' . $name;
@@ -72,9 +72,9 @@ function get_projects($con, $arr) {
   $projects = mysqli_fetch_all($result_projects, MYSQLI_ASSOC);
   return $projects;
 }
-function is_project_exist($con, $projects_id) {
+function is_project_exist($con, $projects_id, $user_id) {
   $sql = "SELECT project_id FROM project WHERE project_id = ? AND id_user = ?";
-  $project_arr = [$projects_id, 1];
+  $project_arr = [$projects_id, $user_id];
   $stmt = db_get_prepare_stmt($con, $sql, $project_arr);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
@@ -113,5 +113,18 @@ function is_email_exist($con, $email) {
   }
   return false;
 }
-
+function get_user_data($con, $user_id) {
+  $sql = "SELECT * FROM cite_user WHERE user_id = $user_id";
+  $result = mysqli_query($con, $sql);
+  return mysqli_fetch_array($result);
+}
+function get_tasks($con, $arr) {
+  $sql = "SELECT * FROM task WHERE id_user = ?";
+  $stmt = db_get_prepare_stmt($con, $sql, $arr);
+  mysqli_stmt_execute($stmt);
+  $result_tasks = mysqli_stmt_get_result($stmt);
+  mysqli_stmt_close($stmt);
+  $tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
+  return $tasks;
+}
 ?>
