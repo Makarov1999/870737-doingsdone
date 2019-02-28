@@ -13,7 +13,6 @@
 
 <body class="<?=((!isset($_SESSION['user'])) && (!isset($is_auth)) && !isset($is_register )) ? 'body-background' :''; ?>">
     <h1 class="visually-hidden">Дела в порядке</h1>
-
     <div class="page-wrapper">
         <div class="container <?=!isset($is_sidebar) ? ' container--with-sidebar':'';?>">
           <?php if (isset($_SESSION['user'])): ?>
