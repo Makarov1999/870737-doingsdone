@@ -781,3 +781,6 @@ a:focus {
 .welcome__text p {
   margin: 20px 0;
 }
+.tasks__item--hide {
+  display: none;
+}

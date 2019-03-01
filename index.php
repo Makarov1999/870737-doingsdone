@@ -22,7 +22,7 @@ if (isset($_SESSION['user'])) {
       $result_tasks = mysqli_stmt_get_result($stmt2);
       mysqli_stmt_close($stmt2);
       $tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
-      $main_page_content = include_template('index.php', ['tasks' => $tasks, 'show_complete_tasks' => $show_complete_tasks]);
+      $main_page_content = include_template('index.php', ['tasks' => $tasks]);
       $layout_content = include_template(
         'layout.php', ['content' => $main_page_content, 'title' => 'Дела в порядке Главная', 'con' => $con, 'projects' => $projects, 'user' => $user]);
     }
@@ -33,7 +33,7 @@ if (isset($_SESSION['user'])) {
     $result_tasks = mysqli_stmt_get_result($stmt2);
     mysqli_stmt_close($stmt2);
     $tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
-    $main_page_content = include_template('index.php', ['tasks' => $tasks, 'show_complete_tasks' => $show_complete_tasks]);
+    $main_page_content = include_template('index.php', ['tasks' => $tasks]);
     $layout_content = include_template(
       'layout.php', ['content' => $main_page_content, 'title' => 'Дела в порядке Главная', 'con' => $con, 'projects' => $projects, 'user' => $user]);
   }
