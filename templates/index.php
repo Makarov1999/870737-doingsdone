@@ -48,7 +48,7 @@
                   <span class="checkbox__text"><?=strip_tags($task["task_name"]);?></span>
               </label>
           </td>
-          <td class="task__date"><?=$task["deadline"] ? date('d.m.Y',strtotime($task['deadline'])) : "Нет";?></td>
+          <td class="task__date"> <?=$task["deadline"] ? date('d.m.Y',strtotime($task['deadline'])) : "Нет";?></td>
           <td class="task__controls">
           </td>
     </tr>
