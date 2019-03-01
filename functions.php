@@ -1,6 +1,5 @@
 <?php
 
-$show_complete_tasks = 0;
 date_default_timezone_set('Europe/Moscow');
 function include_template($name, $data) {
     $name = 'templates/' . $name;
