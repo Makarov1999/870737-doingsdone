@@ -7,6 +7,7 @@ if(isset($_SESSION['user'])) {
   $user = get_user_data($con, $user_id);
   $arr = [$user_id];
   $projects = get_projects($con, $arr);
+  $date = date('Y-m-d', strtotime('now'));
   if ($_SERVER['REQUEST_METHOD']
   == 'POST') {
     $errors = [];
@@ -25,13 +26,13 @@ if(isset($_SESSION['user'])) {
     if (!empty($errors)) {
       $add_page_content = include_template('add.php',['projects' => $projects, 'errors'=> $errors]);
     } else {
-      if ($_FILES['preview']) {
+      if (!empty($_FILES['preview'])) {
         $uploadfile = "uploads/".$_FILES['preview']['name'];
         move_uploaded_file($_FILES['preview']['tmp_name'], $uploadfile);
       }
 
-      $sql = "INSERT INTO task (task_name,task_status, project_id, deadline, task_file, id_user) VALUES ( ? ,? , ? , ?, ?, ?)";
-      $stmt = db_get_prepare_stmt($con, $sql, [$name_task, 0, $id_project, fetch_date_to_format($date), $uploadfile, $user_id]);
+      $sql = "INSERT INTO task (date_create, task_name,task_status, project_id, deadline, task_file, id_user) VALUES (?, ? ,? , ? , ?, ?, ?)";
+      $stmt = db_get_prepare_stmt($con, $sql, [$date ,$name_task, 0, $id_project, fetch_date_to_format($date), $uploadfile, $user_id]);
       mysqli_stmt_execute($stmt);
       header("Location: index.php");
     }

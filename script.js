@@ -7,6 +7,7 @@ if ($checkbox.length) {
     var is_checked = +event.target.checked;
 
     window.location = '/index.php?show_completed=' + is_checked;
+    console.log(is_checked);
   });
 }
 
@@ -26,6 +27,7 @@ if ($taskCheckboxes.length) {
     }
   });
 }
+
 
 flatpickr('#date', {
   enableTime: false,

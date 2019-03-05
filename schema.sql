@@ -7,21 +7,20 @@ CREATE TABLE project (
 
 CREATE TABLE task (
 	task_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	date_create TIMESTAMP,
+	date_create TIMESTAMP NOT NULL,
 	date_complete TIMESTAMP,
 	task_status INT ,
-	task_name CHAR(255), 
-	deadline TIMESTAMP
-	);  
+	task_name CHAR(255),
+	deadline TIMESTAMP,
+	task_file VARCHAR(50)
+	);
 CREATE TABLE cite_user (
 	user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	registration_date TIMESTAMP,
+	registration_date TIMESTAMP NOT NULL,
 	email CHAR(40),
 	username CHAR(40),
 	password TEXT
-);	
-ALTER TABLE task ADD task_file VARCHAR(50);
-
+);
 CREATE UNIQUE INDEX id_project ON project(project_id);
 CREATE INDEX name_project ON project(project_name);
 CREATE UNIQUE INDEX id_task ON task(task_id);
@@ -36,4 +35,3 @@ CREATE INDEX date_registration ON cite_user(registration_date);
 CREATE INDEX user_email ON cite_user(email);
 CREATE INDEX name ON cite_user(username);
 CREATE INDEX passw ON cite_user(password(100));
-

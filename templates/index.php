@@ -9,26 +9,25 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-        <a href="/?date_task=tod" class="tasks-switch__item">Повестка дня</a>
-        <a href="/?date_task=tom" class="tasks-switch__item">Завтра</a>
-        <a href="/?date_task=dead" class="tasks-switch__item">Просроченные</a>
+        <a href="/" class="tasks-switch__item <?=empty($date_task) ? ' tasks-switch__item--active':''; ?>">Все задачи</a>
+        <a href="/?date_task=tod" class="tasks-switch__item <?=(!empty($date_task) && $date_task === 'tod') ? ' tasks-switch__item--active':''; ?>">Повестка дня</a>
+        <a href="/?date_task=tom" class="tasks-switch__item <?=(!empty($date_task) && $date_task === 'tom') ? ' tasks-switch__item--active':''; ?>">Завтра</a>
+        <a href="/?date_task=dead" class="tasks-switch__item <?=(!empty($date_task) && $date_task === 'dead') ? ' tasks-switch__item--active':''; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">
-        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?=(isset($_GET['show_completed']) && $_GET['show_completed'] === 1 ) ? 'checked': '';?>>
+        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?=($show_complete_tasks  === 1 ) ? ' checked': '';?>>
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
 </div>
 
 <table class="tasks">
-  <?php if(!isset($_GET['date_task'])): ?>
   <?php foreach ($tasks as $task): ?>
-      <tr class="tasks__item task <?=$task['task_status'] === 1 ? 'task--completed ': ''; ?><?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>
-        <?=isset($_GET['show_completed']) && $_GET['show_completed'] === 0  ? '': ' tasks__item--hide';?>">
+      <tr class="tasks__item task <?=$task['task_status'] === 1 ? 'task--completed ': ''; ?><?=is_task_important($task['deadline']) ? ' task--important': ''; ?> <?=($show_complete_tasks === 0 && $task['task_status'] === 1) ? ' tasks__item--hide':''?>">
+
           <td class="task__select">
               <label class="checkbox task__checkbox">
-                  <input class="checkbox__input visually-hidden" type="checkbox"<?=$task["task_status"] === '1' ? 'checked' :""; ?>>
+                  <input class="checkbox__input visually-hidden" type="checkbox" value="<?=$task['task_id']?>" <?=$task["task_status"] === 1 ? ' checked' :""; ?>>
                   <span class="checkbox__text"><?=strip_tags($task["task_name"]);?></span>
               </label>
           </td>
@@ -37,22 +36,4 @@
           </td>
     </tr>
   <?php endforeach; ?>
-<?php else: ?>
-  <?php if(isset($_GET['date_task']) && $_GET['date_task'] === 'tod') ?>
-  <?php foreach ($tasks as $task): ?>
-    <?php if(date("Y-m-d", strtotime("now")) === date("Y-m-d", strtotime($task['deadline']))): ?>
-      <tr class="tasks__item task <?=(strtotime("+24 hours now") > strtotime($task['deadline'])) ? 'task--important': '';?>">
-          <td class="task__select">
-              <label class="checkbox task__checkbox">
-                  <input class="checkbox__input visually-hidden" type="checkbox">
-                  <span class="checkbox__text"><?=strip_tags($task["task_name"]);?></span>
-              </label>
-          </td>
-          <td class="task__date"> <?=$task["deadline"] ? date('d.m.Y',strtotime($task['deadline'])) : "Нет";?></td>
-          <td class="task__controls">
-          </td>
-    </tr>
-    <?php endif; ?>
-  <?php endforeach; ?>
-  <?php endif; ?>
 </table>

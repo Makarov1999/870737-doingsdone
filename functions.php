@@ -126,4 +126,10 @@ function get_tasks($con, $arr) {
   $tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
   return $tasks;
 }
+function is_task_important($date) {
+  if (strtotime("+24 hours now") > strtotime($date)) {
+    return true;
+  }
+  return false;
+}
 ?>
