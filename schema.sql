@@ -8,10 +8,10 @@ CREATE TABLE project (
 CREATE TABLE task (
 	task_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	date_create TIMESTAMP NOT NULL,
-	date_complete TIMESTAMP,
+	date_complete TIMESTAMP NULL,
 	task_status INT ,
 	task_name CHAR(255),
-	deadline TIMESTAMP,
+	deadline TIMESTAMP NULL,
 	task_file VARCHAR(50)
 	);
 CREATE TABLE cite_user (

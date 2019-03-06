@@ -50,6 +50,21 @@ if (isset($_SESSION['user'])) {
         $result_tasks = mysqli_stmt_get_result($stmt);
       }
     }
+    if (isset($_GET['task_id']) && isset($_GET['check'])) {
+      $task_id = intval($_GET['task_id']);
+      $check= intval($_GET['check']);
+      $arr2 = [$task_id];
+      if ($check === 1) {
+        $sql = "UPDATE task SET task_status = 1, date_complete = NOW() WHERE task_id = ?";
+        $stmt = db_get_prepare_stmt($con,$sql,$arr2);
+        mysqli_stmt_execute($stmt);
+      } else {
+        $sql = "UPDATE task SET task_status = 0  WHERE task_id = ?";
+        $stmt = db_get_prepare_stmt($con,$sql,$arr2);
+        mysqli_stmt_execute($stmt);
+      }
+      header('Location: index.php');
+    }
   } else {
     $sql = "SELECT * FROM task WHERE id_user = ?";
     $stmt = db_get_prepare_stmt($con,$sql,$arr);

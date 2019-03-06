@@ -27,7 +27,7 @@
 
           <td class="task__select">
               <label class="checkbox task__checkbox">
-                  <input class="checkbox__input visually-hidden" type="checkbox" value="<?=$task['task_id']?>" <?=$task["task_status"] === 1 ? ' checked' :""; ?>>
+                  <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?=$task['task_id']?>" <?=$task["task_status"] === 1 ? ' checked' :""; ?>>
                   <span class="checkbox__text"><?=strip_tags($task["task_name"]);?></span>
               </label>
           </td>
