@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $sql = "INSERT INTO cite_user (registration_date, email, username, password) VALUES (?, ?, ?, ?)";
       $stmt = db_get_prepare_stmt($con, $sql, [$date, $email, $name, $password]);
       mysqli_stmt_execute($stmt);
-      header("Location: index.php");
+      header("Location: auth.php");
     } else {
       $content = include_template('register.php', ['errors' => $errors]);
     }
