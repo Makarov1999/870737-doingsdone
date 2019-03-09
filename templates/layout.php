@@ -72,7 +72,7 @@
                             <?php foreach ($projects as $project): ?>
                                 <li class="main-navigation__list-item">
                                     <a class="main-navigation__list-item-link" href="/?project_id=<?=$project['project_id']?>">
-                                        <?=$project['project_name']?>
+                                        <?=htmlspecialchars($project['project_name']);?>
                                     </a>
                                     <span class="main-navigation__list-item-count"><?=count_tasks($con, $project['project_id']);?></span>
                                 </li>

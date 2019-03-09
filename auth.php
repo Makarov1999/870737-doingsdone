@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
   if (!empty($errors)) {
-    $content = include_template('auth.php',['errors' => $errors]);
+    $content = include_template('auth.php',['errors' => $errors, 'email' => $email]);
   }
 } else {
   $content = include_template('auth.php',[]);

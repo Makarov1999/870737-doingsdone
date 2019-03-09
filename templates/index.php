@@ -32,9 +32,11 @@
               </label>
           </td>
           <td class="task__file">
-              <a class="download-link" href="">Home.psd</a>
+            <?php if (!empty($task['task_file'])): ?>
+              <a class="download-link" href="<?=$task['task_file'];?>"><?=str_replace('uploads/', '', strip_tags($task['task_file'])) ;?></a>
+            <?php endif; ?>
           </td>
-          <td class="task__date"><?=$task["deadline"] ? date('d.m.Y',strtotime($task['deadline'])) : "Нет";?></td>
+          <td class="task__date"><?=$task["deadline"] ? htmlspecialchars( date('d.m.Y',strtotime($task['deadline']))) : "Нет";?></td>
     </tr>
   <?php endforeach; ?>
 </table>

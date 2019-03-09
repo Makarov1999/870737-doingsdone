@@ -24,16 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } else {
     $password = password_hash($password,  PASSWORD_DEFAULT);
   }
-  if (empty($name))
+  if (empty($name)) {
     $errors['name'] = 'Пожалуйста введите имя';
+  }
     if (empty($errors)) {
-      $date = date("Y-m-d", strtotime("now"));
-      $sql = "INSERT INTO cite_user (registration_date, email, username, password) VALUES (?, ?, ?, ?)";
-      $stmt = db_get_prepare_stmt($con, $sql, [$date, $email, $name, $password]);
+      $sql = "INSERT INTO cite_user (registration_date, email, username, password) VALUES (NOW(), ?, ?, ?)";
+      $stmt = db_get_prepare_stmt($con, $sql, [$email, $name, $password]);
       mysqli_stmt_execute($stmt);
       header("Location: auth.php");
     } else {
-      $content = include_template('register.php', ['errors' => $errors]);
+      $content = include_template('register.php', ['errors' => $errors, 'email' => $email, 'username' => $name]);
     }
   } else {
    $content = include_template('register.php', []);

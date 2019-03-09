@@ -4,7 +4,7 @@
   <div class="form__row">
     <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-    <input class="form__input <?=isset($errors['email']) ? ' form__input--error': ''?>" type="text" name="email" id="email" value="" placeholder="Введите e-mail">
+    <input class="form__input <?=isset($errors['email']) ? ' form__input--error': ''?>" type="text" name="email" id="email" value="<?=!isset($errors['email']) ? $email: '';?>" placeholder="Введите e-mail">
     <?php if(isset($errors['email'])): ?>
     <p class="form__message"><?=$errors['email']?></p>
   <?php endif; ?>
@@ -22,7 +22,7 @@
   <div class="form__row">
     <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-    <input class="form__input <?=isset($errors['name']) ? ' form__input--error': ''?>" type="text" name="name" id="name" value="" placeholder="Введите имя">
+    <input class="form__input <?=isset($errors['name']) ? ' form__input--error': ''?>" type="text" name="name" id="name" value="<?=!isset($errors['name']) ? $username: '';?>" placeholder="Введите имя">
     <?php if(isset($errors['password'])): ?>
       <p class="form__message"><?=$errors['name']?></p>
     <?php endif; ?>
