@@ -23,12 +23,12 @@
 
 <table class="tasks">
   <?php foreach ($tasks as $task): ?>
-      <tr class="tasks__item task <?=$task['task_status'] === 1 ? 'task--completed ': ''; ?><?=is_task_important($task['deadline']) ? ' task--important': ''; ?> <?=($show_complete_tasks === 0 && $task['task_status'] === 1) ? ' tasks__item--hide':''?>">
+      <tr class="tasks__item task <?=$task['task_status'] === 1 ? 'task--completed ': ''; ?><?=(!empty($task['deadline']) && is_task_important($task['deadline'])) ? ' task--important': ''; ?> <?=($show_complete_tasks === 0 && $task['task_status'] === 1) ? ' tasks__item--hide':''?>">
 
           <td class="task__select">
               <label class="checkbox task__checkbox">
                   <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?=$task['task_id']?>" <?=$task["task_status"] === 1 ? ' checked' :""; ?>>
-                  <span class="checkbox__text"><?=strip_tags($task["task_name"]);?></span>
+                  <span class="checkbox__text"><?=htmlspecialchars($task["task_name"]);?></span>
               </label>
           </td>
           <td class="task__file">
@@ -36,7 +36,7 @@
               <a class="download-link" href="<?=$task['task_file'];?>"><?=str_replace('uploads/', '', strip_tags($task['task_file'])) ;?></a>
             <?php endif; ?>
           </td>
-          <td class="task__date"><?=$task["deadline"] ? htmlspecialchars( date('d.m.Y',strtotime($task['deadline']))) : "Нет";?></td>
+          <td class="task__date"><?=$task["deadline"] ? htmlspecialchars( date('d.m.Y',strtotime($task['deadline']))) : '';?></td>
     </tr>
   <?php endforeach; ?>
 </table>
