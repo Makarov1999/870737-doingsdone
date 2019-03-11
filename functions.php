@@ -71,9 +71,9 @@ function get_projects($con, $arr) {
   $projects = mysqli_fetch_all($result_projects, MYSQLI_ASSOC);
   return $projects;
 }
-function is_project_exist($con, $projects_id, $user_id) {
-  $sql = "SELECT project_id FROM project WHERE project_id = ? AND id_user = ?";
-  $project_arr = [$projects_id, $user_id];
+function is_project_exist($con, $projects_name, $user_id) {
+  $sql = "SELECT project_id FROM project WHERE project_name = ? AND id_user = ?";
+  $project_arr = [$projects_name, $user_id];
   $stmt = db_get_prepare_stmt($con, $sql, $project_arr);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);

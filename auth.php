@@ -2,6 +2,8 @@
 require_once('init.php');
 require_once('functions.php');
 session_start();
+$email = '';
+$user = [];
 $title = 'Страница входа';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = htmlspecialchars($_POST['email']);
@@ -32,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $content = include_template('auth.php',['errors' => $errors, 'email' => $email]);
   }
 } else {
-  $content = include_template('auth.php',[]);
+  $content = include_template('auth.php',['email' => $email]);
 }
 $layout_content = include_template('layout.php', ['content' => $content,'title' => $title, 'is_auth' => 1]);
 print($layout_content);

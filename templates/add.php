@@ -5,8 +5,8 @@
     <div class="form__row">
       <label class="form__label" for="name">Название <sup>*</sup></label>
 
-      <input class="form__input <?=isset($errors['name']) ? ' form__input--error': '';?>" type="text" name="name" id="name" value="<?=!isset($errors['name']) ? "$name_task" :'';?>" placeholder="Введите название">
-      <?php if($errors['name']): ?>
+      <input class="form__input <?=isset($errors['name']) ? ' form__input--error': '';?>" type="text" name="name" id="name" value="<?=!isset($errors['name']) ? $name_task :'';?>" placeholder="Введите название">
+      <?php if(isset($errors['name'])): ?>
         <p class="form__message"><?=$errors['name'];?></p>
       <?php endif; ?>
     </div>

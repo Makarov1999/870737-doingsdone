@@ -7,6 +7,7 @@ session_start();
 if (isset($_SESSION['user'])) {
   $user_id = intval($_SESSION['user']);
   $user = get_user_data($con, $user_id);
+  $date_task = '';
   $arr = [$user_id];
   $projects = get_projects($con, $arr);
   $show_complete_tasks = 0;

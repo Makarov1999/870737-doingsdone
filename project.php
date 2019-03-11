@@ -5,6 +5,9 @@ session_start();
 if(isset($_SESSION['user'])) {
   $user_id = intval($_SESSION['user']);
   $user = get_user_data($con, $user_id);
+  $arr = [$user_id];
+  $projects = get_projects($con, $arr);
+  $tasks = get_tasks($con, $arr);
   $title = 'Добавление проекта';
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $project_name = htmlspecialchars($_POST['name']);
@@ -27,7 +30,7 @@ if(isset($_SESSION['user'])) {
   } else {
     $content = include_template('project.php', []);
   }
-  $layout_content = include_template('layout.php', ['content' => $content,'projects' => $projects, 'title' => $title, 'user' => $user]);
+  $layout_content = include_template('layout.php', ['content' => $content,'projects' => $projects, 'title' => $title, 'user' => $user, 'tasks' => $tasks, 'con' => $con]);
   print($layout_content);
 } else {
   header('Location: index.php');

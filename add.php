@@ -6,9 +6,14 @@ if(isset($_SESSION['user'])) {
   $user_id = intval($_SESSION['user']);
   $user = get_user_data($con, $user_id);
   $projects = get_projects($con, [$user_id]);
+  $name_task = '';
+  $errors = [];
+  $id_project = 0;
+  $date = '';
+  $columns = '';
+  $questions = '';
   if ($_SERVER['REQUEST_METHOD']
   == 'POST') {
-    $errors = [];
     $name_task  = htmlspecialchars($_POST['name']);
 
     if (empty($name_task)) {
@@ -16,7 +21,7 @@ if(isset($_SESSION['user'])) {
     }
     $arr = [$name_task, 0, $user_id];
     if (isset($_POST['project']) && !empty($_POST['project'])) {
-      if (!is_project_exist($con, $_POST['project'], $user_id)) {
+      if (is_project_exist($con, $_POST['project'], $user_id)) {
           $errors['project'] = 'Такого проекта не существует';
       }
       else {
@@ -55,7 +60,7 @@ if(isset($_SESSION['user'])) {
       header("Location: index.php");
     }
   } else {
-    $add_page_content = include_template('add.php',['projects' => $projects]);
+    $add_page_content = include_template('add.php',['projects' => $projects, 'errors'=> $errors, 'name_task' => $name_task, 'id_project' => $id_project, 'date' => $date]);
   }
   $layout_content = include_template(
     'layout.php', ['content' => $add_page_content, 'title' => 'Дела в порядке Добавление задачи', 'con' => $con, 'projects' => $projects, 'user' => $user]);

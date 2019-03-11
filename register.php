@@ -2,6 +2,8 @@
 require_once('functions.php');
 require_once('init.php');
 $title = 'Страница регистрации';
+$name = '';
+$email = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $errors = [];
   $email  = htmlspecialchars($_POST['email']);
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $content = include_template('register.php', ['errors' => $errors, 'email' => $email, 'username' => $name]);
     }
   } else {
-   $content = include_template('register.php', []);
+   $content = include_template('register.php', ['email' => $email, 'username' => $name]);
  }
  $layout_content = include_template('layout.php', ['content' => $content, 'title' => $title, 'is_register' => 0 ]);
 print($layout_content);
