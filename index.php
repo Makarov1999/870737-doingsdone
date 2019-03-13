@@ -64,7 +64,7 @@ if (isset($_SESSION['user'])) {
 
 } else {
   $content = include_template('guest.php', []);
-  $layout_content = include_template('layout.php', ['content' => $content, 'is_sidebar' => 1]);
+  $layout_content = include_template('layout.php', ['content' => $content, 'is_sidebar' => 1, 'title' => 'Дела в порядке Главная' ]);
 }
 print($layout_content);
 
